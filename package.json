@@ -17,7 +17,7 @@
 	},
 	"homepage": "https://github.com/DejanSandic/vscode-static-forge#readme",
 	"categories": [ "Other" ],
-	"activationEvents": [ "onCommand:extension.helloWorld" ],
+	"activationEvents": [ "onCommand:extension.helloWorld", "*" ],
 	"main": "./out/extension.js",
 	"contributes": {
 		"commands": [
@@ -33,8 +33,8 @@
 				"command": "extension.start",
 				"title": "Start the forge",
 				"icon": {
-					"light": "assets/logo.png",
-					"dark": "assets/logo.png"
+					"light": "assets/play.svg",
+					"dark": "assets/play.svg"
 				}
 			},
 			{
@@ -56,23 +56,17 @@
 			]
 		},
 		"views": {
-			"explorer": [
-				{
-					"id": "exampleView",
-					"name": "exampleView"
-				}
-			],
 			"static-forge": [
 				{
 					"id": "forgePages",
 					"name": "Pages"
 				},
 				{
-					"id": "forge-components",
+					"id": "forgeComponents",
 					"name": "Components"
 				},
 				{
-					"id": "forge-errors",
+					"id": "forgeErrors",
 					"name": "Errors",
 					"when": "errorsExist"
 				}
@@ -83,11 +77,18 @@
 				{
 					"command": "extension.start",
 					"group": "navigation",
-					"when": "view === exampleView"
+					"when": "testTest"
 				},
 				{
-					"command": "extension.restart",
+					"command": "extension.helloWorld",
 					"group": "navigation"
+				}
+			],
+			"view/item/context": [
+				{
+					"command": "extension.start",
+					"group": "inline",
+					"when": "viewItem == page"
 				}
 			]
 		}
