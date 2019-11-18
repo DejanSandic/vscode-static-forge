@@ -1,0 +1,113 @@
+{
+	"name": "vscode-static-forge",
+	"displayName": "vscode-static-forge",
+	"description": "Static forge for Visual Studio Code",
+	"version": "0.0.1",
+	"engines": {
+		"vscode": "^1.40.0"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/DejanSandic/vscode-static-forge.git"
+	},
+	"author": "Dejan Sandic - Deyo",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/DejanSandic/vscode-static-forge/issues"
+	},
+	"homepage": "https://github.com/DejanSandic/vscode-static-forge#readme",
+	"categories": [ "Other" ],
+	"activationEvents": [ "onCommand:extension.helloWorld" ],
+	"main": "./out/extension.js",
+	"contributes": {
+		"commands": [
+			{
+				"command": "extension.helloWorld",
+				"title": "Hello World",
+				"icon": {
+					"light": "assets/logo.png",
+					"dark": "assets/logo.png"
+				}
+			},
+			{
+				"command": "extension.start",
+				"title": "Start the forge",
+				"icon": {
+					"light": "assets/logo.png",
+					"dark": "assets/logo.png"
+				}
+			},
+			{
+				"command": "extension.restart",
+				"title": "Restart the forge",
+				"icon": {
+					"light": "assets/logo.png",
+					"dark": "assets/logo.png"
+				}
+			}
+		],
+		"viewsContainers": {
+			"activitybar": [
+				{
+					"id": "static-forge",
+					"title": "Static Forge",
+					"icon": "assets/logo.png"
+				}
+			]
+		},
+		"views": {
+			"explorer": [
+				{
+					"id": "exampleView",
+					"name": "exampleView"
+				}
+			],
+			"static-forge": [
+				{
+					"id": "forgePages",
+					"name": "Pages"
+				},
+				{
+					"id": "forge-components",
+					"name": "Components"
+				},
+				{
+					"id": "forge-errors",
+					"name": "Errors",
+					"when": "errorsExist"
+				}
+			]
+		},
+		"menus": {
+			"view/title": [
+				{
+					"command": "extension.start",
+					"group": "navigation",
+					"when": "view === exampleView"
+				},
+				{
+					"command": "extension.restart",
+					"group": "navigation"
+				}
+			]
+		}
+	},
+	"scripts": {
+		"vscode:prepublish": "npm run compile",
+		"compile": "tsc -p ./",
+		"watch": "tsc -watch -p ./",
+		"pretest": "npm run compile",
+		"test": "node ./out/test/runTest.js"
+	},
+	"devDependencies": {
+		"@types/glob": "^7.1.1",
+		"@types/mocha": "^5.2.7",
+		"@types/node": "^12.11.7",
+		"@types/vscode": "^1.40.0",
+		"glob": "^7.1.5",
+		"mocha": "^6.2.2",
+		"typescript": "^3.6.4",
+		"tslint": "^5.20.0",
+		"vscode-test": "^1.2.2"
+	}
+}
