@@ -17,12 +17,12 @@
 	},
 	"homepage": "https://github.com/DejanSandic/vscode-static-forge#readme",
 	"categories": [ "Other" ],
-	"activationEvents": [ "onCommand:extension.helloWorld", "*" ],
+	"activationEvents": [ "onCommand:forge.helloWorld", "*" ],
 	"main": "./out/extension.js",
 	"contributes": {
 		"commands": [
 			{
-				"command": "extension.helloWorld",
+				"command": "forge.helloWorld",
 				"title": "Hello World",
 				"icon": {
 					"light": "assets/logo.png",
@@ -30,19 +30,35 @@
 				}
 			},
 			{
-				"command": "extension.start",
+				"command": "forge.start",
 				"title": "Start the forge",
 				"icon": {
-					"light": "assets/play.svg",
-					"dark": "assets/play.svg"
+					"light": "assets/material/play.png",
+					"dark": "assets/material/play.png"
 				}
 			},
 			{
-				"command": "extension.restart",
+				"command": "forge.restart",
 				"title": "Restart the forge",
 				"icon": {
-					"light": "assets/logo.png",
-					"dark": "assets/logo.png"
+					"light": "assets/material/restart.png",
+					"dark": "assets/material/restart.png"
+				}
+			},
+			{
+				"command": "forge.stop",
+				"title": "Stop the forge",
+				"icon": {
+					"light": "assets/material/stop.png",
+					"dark": "assets/material/stop.png"
+				}
+			},
+			{
+				"command": "forge.browser",
+				"title": "Open the browser",
+				"icon": {
+					"light": "assets/material/browser.png",
+					"dark": "assets/material/browser.png"
 				}
 			}
 		],
@@ -58,35 +74,37 @@
 		"views": {
 			"static-forge": [
 				{
-					"id": "forgePages",
-					"name": "Pages"
-				},
-				{
-					"id": "forgeComponents",
-					"name": "Components"
-				},
-				{
-					"id": "forgeErrors",
-					"name": "Errors",
-					"when": "errorsExist"
+					"id": "forgeTree",
+					"name": ""
 				}
 			]
 		},
 		"menus": {
 			"view/title": [
 				{
-					"command": "extension.start",
+					"command": "forge.start",
 					"group": "navigation",
-					"when": "testTest"
+					"when": "!running"
 				},
 				{
-					"command": "extension.helloWorld",
-					"group": "navigation"
+					"command": "forge.restart",
+					"group": "navigation",
+					"when": "running"
+				},
+				{
+					"command": "forge.stop",
+					"group": "navigation",
+					"when": "running"
+				},
+				{
+					"command": "forge.browser",
+					"group": "navigation",
+					"when": "running"
 				}
 			],
 			"view/item/context": [
 				{
-					"command": "extension.start",
+					"command": "forge.start",
 					"group": "inline",
 					"when": "viewItem == page"
 				}
