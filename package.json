@@ -33,32 +33,32 @@
 				"command": "forge.start",
 				"title": "Start the forge",
 				"icon": {
-					"light": "assets/material/play.png",
-					"dark": "assets/material/play.png"
+					"light": "assets/icons/play.png",
+					"dark": "assets/icons/play.png"
 				}
 			},
 			{
 				"command": "forge.restart",
 				"title": "Restart the forge",
 				"icon": {
-					"light": "assets/material/restart.png",
-					"dark": "assets/material/restart.png"
+					"light": "assets/icons/restart.png",
+					"dark": "assets/icons/restart.png"
 				}
 			},
 			{
 				"command": "forge.stop",
 				"title": "Stop the forge",
 				"icon": {
-					"light": "assets/material/stop.png",
-					"dark": "assets/material/stop.png"
+					"light": "assets/icons/stop.png",
+					"dark": "assets/icons/stop.png"
 				}
 			},
 			{
 				"command": "forge.browser",
 				"title": "Open the browser",
 				"icon": {
-					"light": "assets/material/browser.png",
-					"dark": "assets/material/browser.png"
+					"light": "assets/icons/browser.png",
+					"dark": "assets/icons/browser.png"
 				}
 			}
 		],
@@ -122,11 +122,15 @@
 		"@types/glob": "^7.1.1",
 		"@types/mocha": "^5.2.7",
 		"@types/node": "^12.11.7",
+		"@types/uuid": "^3.4.6",
 		"@types/vscode": "^1.40.0",
 		"glob": "^7.1.5",
 		"mocha": "^6.2.2",
-		"typescript": "^3.6.4",
 		"tslint": "^5.20.0",
+		"typescript": "^3.6.4",
 		"vscode-test": "^1.2.2"
+	},
+	"dependencies": {
+		"uuid": "^3.3.3"
 	}
 }
