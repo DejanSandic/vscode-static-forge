@@ -1,21 +1,47 @@
+import * as open from 'open';
 import { commands, window } from 'vscode';
+import * as loaders from './loaders';
+import { startServer, stopServer } from './server';
+const { showInformationMessage, showErrorMessage } = window;
+
+let port: number;
 
 /**
  * VIEW TITLE
  */
-export const start = commands.registerCommand('forge.start', () => {
-	window.showInformationMessage('Static forge started');
-	commands.executeCommand('setContext', 'running', true);
+export const start = commands.registerCommand('forge.start', async () => {
+	try {
+		port = await startServer();
+		loaders.startAll();
+		showInformationMessage('Static forge started on the port ' + port);
+		commands.executeCommand('setContext', 'running', true);
+	} catch (err) {
+		showErrorMessage('Error while starting the forge:\n' + err);
+	}
 });
-export const restart = commands.registerCommand('forge.restart', () => {
-	window.showInformationMessage('Static forge restarted');
+
+export const stop = commands.registerCommand('forge.stop', async () => {
+	try {
+		await stopServer();
+		showInformationMessage('Static forge stopped');
+		commands.executeCommand('setContext', 'running', false);
+	} catch (err) {
+		showErrorMessage('Error while stopping the forge:\n' + err);
+	}
 });
-export const stop = commands.registerCommand('forge.stop', () => {
-	window.showInformationMessage('Static forge stopped');
-	commands.executeCommand('setContext', 'running', false);
+
+export const restart = commands.registerCommand('forge.restart', async () => {
+	try {
+		await stopServer();
+		port = await startServer();
+		showInformationMessage('Static forge restarted on the port ' + port);
+	} catch (err) {
+		showErrorMessage('Error while restarting the forge:\n' + err);
+	}
 });
-export const browser = commands.registerCommand('forge.browser', () => {
-	window.showInformationMessage('Opening browser');
+
+export const browser = commands.registerCommand('forge.browser', async () => {
+	await open('http://localhost:' + port);
 });
 
 /**
@@ -23,5 +49,5 @@ export const browser = commands.registerCommand('forge.browser', () => {
  */
 export const selectPage = commands.registerCommand('forge.selectPage', (s) => {
 	console.log({ s });
-	window.showInformationMessage('Page selected');
+	showInformationMessage('Page selected');
 });

@@ -1,5 +1,4 @@
-import { forgeTree, actions } from './helpers';
-// import * as actions from './helpers/actions';
+import { forgeTree, actions } from './components';
 
 // Import types
 import { ExtensionContext, window } from 'vscode';

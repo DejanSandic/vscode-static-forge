@@ -1,3 +1,3 @@
-export { forgeTree } from './ForgeTree';
-import * as actions from './actions';
-export { actions };
+export { paths } from './paths';
+// export { socket } from './socket'
+export { Watcher } from './Watcher';

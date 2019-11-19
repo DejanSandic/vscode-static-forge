@@ -137,9 +137,11 @@
 		"vscode-test": "^1.2.2"
 	},
 	"dependencies": {
+		"chokidar": "^3.3.0",
 		"express": "^4.17.1",
 		"get-port": "^5.0.0",
 		"open": "^7.0.0",
+		"socket.io": "^2.3.0",
 		"uuid": "^3.3.3"
 	}
 }
