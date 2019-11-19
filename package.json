@@ -16,8 +16,13 @@
 		"url": "https://github.com/DejanSandic/vscode-static-forge/issues"
 	},
 	"homepage": "https://github.com/DejanSandic/vscode-static-forge#readme",
-	"categories": [ "Other" ],
-	"activationEvents": [ "onCommand:forge.helloWorld", "*" ],
+	"categories": [
+		"Other"
+	],
+	"activationEvents": [
+		"onCommand:forge.helloWorld",
+		"*"
+	],
 	"main": "./out/extension.js",
 	"contributes": {
 		"commands": [
@@ -119,6 +124,7 @@
 		"test": "node ./out/test/runTest.js"
 	},
 	"devDependencies": {
+		"@types/express": "^4.17.2",
 		"@types/glob": "^7.1.1",
 		"@types/mocha": "^5.2.7",
 		"@types/node": "^12.11.7",
@@ -131,6 +137,9 @@
 		"vscode-test": "^1.2.2"
 	},
 	"dependencies": {
+		"express": "^4.17.1",
+		"get-port": "^5.0.0",
+		"open": "^7.0.0",
 		"uuid": "^3.3.3"
 	}
 }
