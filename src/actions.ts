@@ -7,7 +7,7 @@ const { showInformationMessage, showErrorMessage } = window;
 let port: number;
 
 /**
- * VIEW TITLE
+ * Server actions
  */
 export const start = commands.registerCommand('forge.start', async () => {
 	try {
@@ -45,9 +45,14 @@ export const browser = commands.registerCommand('forge.browser', async () => {
 });
 
 /**
- * VIEW TITLE
+ * Tree actions
  */
 export const selectPage = commands.registerCommand('forge.selectPage', (s) => {
 	console.log({ s });
 	showInformationMessage('Page selected');
+});
+
+export const selectComponent = commands.registerCommand('forge.selectComponent', (s) => {
+	console.log({ s });
+	showInformationMessage('Component selected');
 });

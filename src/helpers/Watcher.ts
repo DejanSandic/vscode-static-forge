@@ -10,12 +10,13 @@ export class Watcher {
 	private watcher: FSWatcher | undefined;
 	private _data: any;
 
-	constructor(path: string, callback: (...args: any) => any) {
+	constructor(path: string, data: any, callback: callback) {
 		this.path = path;
 		this.callback = callback;
+		this._data = data;
 	}
 
-	readFile(path: string, def: any) {
+	readFile(path: string) {
 		const exists = existsSync(path);
 		if (exists) return readFileSync(path, 'utf8');
 		else return '';

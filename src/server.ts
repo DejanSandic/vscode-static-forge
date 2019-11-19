@@ -1,9 +1,13 @@
 import { Server } from 'http';
 import * as getPort from 'get-port';
 import * as express from 'express';
-import { paths } from './helpers';
+
 // Import loaders
-import { head, favicon, script } from './loaders';
+import { head, favicon, script, pages } from './loaders';
+
+// Import helpers
+import { paths } from './helpers';
+import { page404 } from './client-helpers/404';
 
 // Create server
 const app = express();
@@ -28,8 +32,12 @@ app.get('*', (req, res) => {
 	// const page = pages[pageName] || page404;
 	// const index = createIndex(head, page, components, pageLinks, script);
 
+	const pageName = req.params[0];
+	const page = pages.content[pageName] || page404;
+
 	const index = `
 		${head.content}
+		${page}
 		${script.content}
 	`;
 	res.end(index);

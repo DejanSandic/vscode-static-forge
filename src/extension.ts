@@ -1,4 +1,5 @@
-import { forgeTree, actions } from './components';
+import { forgeTree } from './components';
+import * as actions from './actions';
 
 // Import types
 import { ExtensionContext, window } from 'vscode';
