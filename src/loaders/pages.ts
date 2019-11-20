@@ -1,5 +1,5 @@
 import { relative } from 'path';
-import { Watcher, paths, extension } from '../helpers';
+import { Watcher, paths, extension, socket } from '../helpers';
 
 function formatPageName(pagePath: string) {
 	const fullName = relative(paths.pages, pagePath);
@@ -19,4 +19,5 @@ export const pages = new Watcher(paths.pages, {}, function(context, event, path)
 	else if (event === 'unlink') delete pages[name];
 
 	context.content = pages;
+	socket.update('page', name);
 });

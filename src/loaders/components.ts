@@ -1,5 +1,5 @@
 import { relative } from 'path';
-import { Watcher, paths, extension } from '../helpers';
+import { Watcher, paths, extension, socket } from '../helpers';
 
 function formatComponentName(componentPath: string) {
 	const name = relative(paths.components, componentPath);
@@ -17,4 +17,5 @@ export const components = new Watcher(paths.components, {}, function(context, ev
 	else if (event === 'unlink') delete components[name];
 
 	context.content = components;
+	socket.update('component', name);
 });

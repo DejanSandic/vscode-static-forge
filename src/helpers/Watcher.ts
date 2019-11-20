@@ -25,7 +25,7 @@ export class Watcher {
 	startWatching() {
 		const self = this;
 		this.watcher && this.watcher.close();
-		this.watcher = watch(this.path).on('all', (event, path) => {
+		this.watcher = watch(this.path).on('all', (event: string, path: string) => {
 			// Wait 100ms for text editor to release the file
 			// this is the common bug with VS code
 			setTimeout(() => {

@@ -12,7 +12,7 @@ class SocketHandler {
 		this.io && this.io.emit(event, data);
 	}
 
-	update(type: string, name: string) {
+	update(type: string, name?: string) {
 		this.io && this.io.emit('update', { type, name, status: 'OK' });
 	}
 }
