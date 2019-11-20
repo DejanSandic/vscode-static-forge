@@ -42,10 +42,6 @@ class ForgeTree implements TreeDataProvider<Item> {
 				children: []
 			}
 		];
-
-		// this.updatePages([ '/index', '/contact' ]);
-		// this.updateComponents([ 'my-header', 'my-footer' ]);
-		// this.updatePageComponents([ 'my-navbar', 'my-sidebar' ]);
 	}
 
 	getTreeItem(element: Item): TreeItem {
@@ -61,18 +57,19 @@ class ForgeTree implements TreeDataProvider<Item> {
 
 	updatePages(items: any[]) {
 		const pagesItem = this.data[0];
+
 		pagesItem.children = items.map((label) => ({
 			id: uuid(),
-			label,
+			label: label === '/' ? '/index' : label,
 			iconPath: pageIcon,
+			tooltip: 'Open this page in the browser',
 			command: {
 				command: 'forge.selectPage',
-				title: 'Open this page in the browser',
+				title: '',
 				arguments: [ label ]
 			},
 			children: []
 		}));
-		this.render();
 	}
 
 	updatePageComponents(items: any[]) {
@@ -82,9 +79,10 @@ class ForgeTree implements TreeDataProvider<Item> {
 			id: uuid(),
 			label,
 			iconPath: componentIcon,
+			tooltip: 'View code of this component',
 			command: {
 				command: 'forge.selectComponent',
-				title: 'View code of this component',
+				title: '',
 				arguments: [ label ]
 			},
 			children: []
@@ -98,9 +96,10 @@ class ForgeTree implements TreeDataProvider<Item> {
 			id: uuid(),
 			label,
 			iconPath: componentIcon,
+			tooltip: 'View code of this component',
 			command: {
 				command: 'forge.selectComponent',
-				title: 'View code of this component',
+				title: '',
 				arguments: [ label ]
 			},
 			children: []

@@ -1,5 +1,6 @@
 import { relative } from 'path';
 import { Watcher, paths, extension, socket } from '../helpers';
+import { forgeTree } from '../tree';
 
 function formatComponentName(componentPath: string) {
 	const name = relative(paths.components, componentPath);
@@ -18,4 +19,7 @@ export const components = new Watcher(paths.components, {}, function(context, ev
 
 	context.content = components;
 	socket.update('component', name);
+
+	const treeItems = Object.keys(components);
+	forgeTree.updateComponents(treeItems);
 });

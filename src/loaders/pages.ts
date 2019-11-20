@@ -1,5 +1,6 @@
 import { relative } from 'path';
 import { Watcher, paths, extension, socket } from '../helpers';
+import { forgeTree } from '../tree';
 
 function formatPageName(pagePath: string) {
 	const fullName = relative(paths.pages, pagePath);
@@ -20,4 +21,7 @@ export const pages = new Watcher(paths.pages, {}, function(context, event, path)
 
 	context.content = pages;
 	socket.update('page', name);
+
+	const treeItems = Object.keys(pages);
+	forgeTree.updatePages(treeItems);
 });

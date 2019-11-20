@@ -1,4 +1,4 @@
-import { forgeTree } from './forgeTree';
+import { forgeTree } from './tree';
 import * as actions from './actions';
 
 // Import types
