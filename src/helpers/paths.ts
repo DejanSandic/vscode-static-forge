@@ -1,3 +1,4 @@
+import { join } from 'path';
 import { workspace } from 'vscode';
 
 class Paths {
@@ -18,31 +19,31 @@ class Paths {
 	}
 
 	get assets() {
-		return this.path + '/assets';
+		return join(this.path, '/assets');
 	}
 
 	get components() {
-		return this.path + '/components';
+		return join(this.path, '/components');
 	}
 
 	get pages() {
-		return this.path + '/pages';
+		return join(this.path, '/pages');
 	}
 
 	get sass() {
-		return this.path + '/sass';
+		return join(this.path, '/sass');
 	}
 
 	get css() {
-		return this.path + '/assets/css';
+		return join(this.path, '/assets/css');
 	}
 
 	get head() {
-		return this.path + '/head.html';
+		return join(this.path, '/head.html');
 	}
 
 	get script() {
-		return this.path + '/script.html';
+		return join(this.path, '/script.html');
 	}
 }
 
