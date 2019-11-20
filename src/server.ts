@@ -3,15 +3,15 @@ import * as getPort from 'get-port';
 import * as express from 'express';
 
 // Import loaders
-import { head, favicon, script, pages, components } from './loaders';
+import { favicon } from './loaders';
 
 // Import helpers
-import { paths, createIndex } from './helpers';
-import { page404 } from './client-helpers/404';
+import { socket, paths, createIndex } from './helpers';
 
 // Create server
 const app = express();
 const server = new Server(app);
+socket.init(server);
 
 // Return favicon
 app.get('/favicon.ico', (_, res) => {
@@ -22,16 +22,6 @@ app.get('/favicon.ico', (_, res) => {
 app.use(express.static(paths.assets));
 
 app.get('*', (req, res) => {
-	// const head = loadHead();
-	// const script = loadScript();
-	// const pages = loadPages();
-	// const components = loadComponents();
-	// const pageLinks = Object.keys(pages);
-
-	// const pageName = req.params[0];
-	// const page = pages[pageName] || page404;
-	// const index = createIndex(head, page, components, pageLinks, script);
-
 	const pageName = req.params[0];
 	const index = createIndex(pageName);
 	res.end(index);

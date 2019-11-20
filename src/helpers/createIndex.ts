@@ -1,6 +1,6 @@
 import { head, script, pages, components } from '../loaders';
-import { page404 } from '../client-helpers/404';
-import { loadHelper } from '../client-helpers/loadHelper';
+import { page404 } from './404';
+import { loadHelper } from './loadHelper';
 
 // Load helpers
 const hide = loadHelper('hide.js');
