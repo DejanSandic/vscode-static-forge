@@ -1,5 +1,5 @@
 import { relative } from 'path';
-import { Watcher, paths } from '../helpers';
+import { Watcher, paths, extension } from '../helpers';
 
 function formatPageName(pagePath: string) {
 	const fullName = relative(paths.pages, pagePath);
@@ -8,6 +8,9 @@ function formatPageName(pagePath: string) {
 }
 
 export const pages = new Watcher(paths.pages, {}, function(context, event, path) {
+	// Only track html files
+	if (!extension(path, '.html')) return;
+
 	const pages = { ...context.content };
 	const name = formatPageName(path);
 	const changed = event === 'add' || event === 'change';
