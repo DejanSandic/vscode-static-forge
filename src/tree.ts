@@ -8,28 +8,39 @@ const loadIcon = (icon: string): string => join(__dirname, '../assets/icons/', i
 // Icons
 const pagesIcon = loadIcon('pages.svg');
 const pageIcon = loadIcon('page.svg');
+const pageActiveIcon = loadIcon('page-active.svg');
 const componentsIcon = loadIcon('components.svg');
 const componentIcon = loadIcon('component.svg');
+
+// Comments
+const originalContent = '<!-- @forge: Original content  -->\n\n';
+const renderedContent = '<!-- @forge: Rendered content  -->\n\n';
 
 interface Item extends TreeItem {
 	children: Item[] | undefined;
 }
 
+interface Components {
+	[key: string]: string;
+}
+
 class ForgeTree implements TreeDataProvider<Item> {
 	data: Item[];
+	activePage: string;
 
 	constructor() {
+		this.activePage = '';
 		this.data = [
 			{
 				id: 'forgePages',
-				label: 'Pages',
+				label: 'Navigation',
 				iconPath: pagesIcon,
 				collapsibleState: 2,
 				children: []
 			},
 			{
 				id: 'forgePageComponents',
-				label: 'Page components',
+				label: 'Components',
 				iconPath: componentsIcon,
 				collapsibleState: 2,
 				children: []
@@ -90,20 +101,41 @@ class ForgeTree implements TreeDataProvider<Item> {
 		this.render();
 	}
 
-	updateComponents(items: any[]) {
+	updateComponents(items: Components) {
+		const components = Object.entries(items);
 		const componentsItem = this.data[2];
-		componentsItem.children = items.map((label) => ({
-			id: uuid(),
-			label,
-			iconPath: componentIcon,
-			tooltip: 'View code of this component',
-			command: {
-				command: 'forge.selectComponent',
-				title: '',
-				arguments: [ label ]
-			},
-			children: []
-		}));
+
+		componentsItem.children = components.map(([ label, html ]) => {
+			html = `${originalContent}${html}`;
+
+			return {
+				id: uuid(),
+				label,
+				iconPath: componentIcon,
+				tooltip: 'View code of this component',
+				command: {
+					command: 'forge.selectComponent',
+					title: '',
+					arguments: [ label, html ]
+				},
+				children: []
+			};
+		});
+		this.render();
+	}
+
+	updateActivePage(path: string) {
+		this.activePage = path === '/' ? '/index' : path;
+		const pagesItem = this.data[0];
+
+		pagesItem.children &&
+			pagesItem.children.forEach((page) => {
+				if (page.label === this.activePage) {
+					page.iconPath = pageActiveIcon;
+				} else {
+					page.iconPath = pageIcon;
+				}
+			});
 		this.render();
 	}
 

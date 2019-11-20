@@ -19,7 +19,5 @@ export const components = new Watcher(paths.components, {}, function(context, ev
 
 	context.content = components;
 	socket.update('component', name);
-
-	const treeItems = Object.keys(components);
-	forgeTree.updateComponents(treeItems);
+	forgeTree.updateComponents(components);
 });

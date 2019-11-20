@@ -2,6 +2,8 @@ import * as open from 'open';
 import { commands, window } from 'vscode';
 import * as loaders from './loaders';
 import { startServer, stopServer } from './server';
+import { socket, openEditor } from './helpers';
+import { forgeTree } from './tree';
 const { showInformationMessage, showErrorMessage } = window;
 
 let port: number;
@@ -47,12 +49,15 @@ export const browser = commands.registerCommand('forge.browser', async () => {
 /**
  * Tree actions
  */
-export const selectPage = commands.registerCommand('forge.selectPage', (s) => {
-	console.log({ s });
-	showInformationMessage('Page selected');
+export const selectPage = commands.registerCommand('forge.selectPage', (path) => {
+	socket.redirect(path);
 });
 
-export const selectComponent = commands.registerCommand('forge.selectComponent', (s) => {
-	console.log({ s });
-	showInformationMessage('Component selected');
+export const selectComponent = commands.registerCommand('forge.selectComponent', async (name, html) => {
+	await openEditor(name, html);
+});
+
+// Highlight tree item when page is loaded
+socket.clientLoaded((path) => {
+	forgeTree.updateActivePage(path);
 });
