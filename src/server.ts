@@ -3,10 +3,10 @@ import * as getPort from 'get-port';
 import * as express from 'express';
 
 // Import loaders
-import { head, favicon, script, pages } from './loaders';
+import { head, favicon, script, pages, components } from './loaders';
 
 // Import helpers
-import { paths } from './helpers';
+import { paths, createIndex } from './helpers';
 import { page404 } from './client-helpers/404';
 
 // Create server
@@ -33,13 +33,7 @@ app.get('*', (req, res) => {
 	// const index = createIndex(head, page, components, pageLinks, script);
 
 	const pageName = req.params[0];
-	const page = pages.content[pageName] || page404;
-
-	const index = `
-		${head.content}
-		${page}
-		${script.content}
-	`;
+	const index = createIndex(pageName);
 	res.end(index);
 });
 
