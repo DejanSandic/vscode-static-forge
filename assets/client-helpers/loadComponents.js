@@ -1,11 +1,12 @@
 {
-	components.forEach(([ name, html ]) => {
+	components.forEach(([ name, content ]) => {
 		customElements.define(
 			name,
 			class extends HTMLElement {
 				constructor() {
 					super();
 
+					let html = content;
 					const props = {};
 					const modifiers = {};
 
@@ -31,7 +32,7 @@
 
 						const times = +modifiers.repeat;
 						for (let i = 1; i <= times; i++) {
-							newHtml += html.replace('$index', i);
+							newHtml += html.replace('$index', i) + '\n';
 						}
 
 						html = newHtml;
@@ -43,8 +44,21 @@
 						if (!condition) html = '';
 					}
 
+					// Inject html into the DOM
 					this.outerHTML = html;
-					registeredComponents[name] = this;
+
+					// Add component to the component registry
+					const component = {
+						el: this,
+						content,
+						html
+					};
+
+					if (name in registeredComponents) {
+						registeredComponents[name].push(component);
+					} else {
+						registeredComponents[name] = [ component ];
+					}
 				}
 			}
 		);

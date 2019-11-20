@@ -58,6 +58,8 @@ export const selectComponent = commands.registerCommand('forge.selectComponent',
 });
 
 // Highlight tree item when page is loaded
-socket.clientLoaded((path) => {
+socket.clientLoaded((path, components) => {
 	forgeTree.updateActivePage(path);
+	forgeTree.updatePageComponents(components);
+	forgeTree.render();
 });

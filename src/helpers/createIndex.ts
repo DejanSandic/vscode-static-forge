@@ -23,21 +23,22 @@ export function createIndex(path: string) {
             <script class="rbsk" src="/socket.io/socket.io.js"></script>
             <script class="rbsk">${polyfil}</script>
             <script class="rbsk">
-            const socket = io();
-            ${socket}
-            const pages = ${JSON.stringify(links)};
-            const registeredComponents = {};
+               const socket = io();
+               const pages = ${JSON.stringify(links)};
+               const registeredComponents = {};
+               const componentsRegistry = {};
 
-            (function init() {
-               const componentsMap = ${JSON.stringify(components.content)};
-               const components = Object.entries(componentsMap);
-
-               ${loadComponents}
-            })();
-            
-            ${loadNavigation}
-            ${tilde}
-            ${hide}
+               (function init() {
+                  const componentsMap = ${JSON.stringify(components.content)};
+                  const components = Object.entries(componentsMap);
+                  
+                  ${loadComponents}
+               })();
+               
+               ${socket}
+               ${loadNavigation}
+               ${tilde}
+               ${hide}
             </script>
             ${navigation}
             ${script.content}

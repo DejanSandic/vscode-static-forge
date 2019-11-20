@@ -24,7 +24,7 @@ class SocketHandler {
 		this.io && this.io.emit('redirect', path);
 	}
 
-	clientLoaded(callback: (path: string) => void) {
+	clientLoaded(callback: (path: string, components: any) => void) {
 		this.io &&
 			this.io.on('connection', (socket) => {
 				socket.on('client-loaded', callback);

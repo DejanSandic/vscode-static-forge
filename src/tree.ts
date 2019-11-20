@@ -13,8 +13,8 @@ const componentsIcon = loadIcon('components.svg');
 const componentIcon = loadIcon('component.svg');
 
 // Comments
-const originalContent = '<!-- @forge: Original content  -->\n\n';
-const renderedContent = '<!-- @forge: Rendered content  -->\n\n';
+const originalContent = '<!-- @forge: Original content  -->';
+const renderedContent = '<!-- @forge: Rendered content  -->';
 
 interface Item extends TreeItem {
 	children: Item[] | undefined;
@@ -22,6 +22,19 @@ interface Item extends TreeItem {
 
 interface Components {
 	[key: string]: string;
+}
+
+interface RegisteredComponents {
+	[key: string]: Array<{
+		html: string;
+		content: string;
+	}>;
+}
+
+interface PageComponent {
+	label: string;
+	html: string;
+	content: string;
 }
 
 class ForgeTree implements TreeDataProvider<Item> {
@@ -83,22 +96,35 @@ class ForgeTree implements TreeDataProvider<Item> {
 		}));
 	}
 
-	updatePageComponents(items: any[]) {
+	updatePageComponents(registeredComponents: RegisteredComponents) {
 		const pageComponentsItem = this.data[1];
+		const components: PageComponent[] = [];
 
-		pageComponentsItem.children = items.map((label) => ({
-			id: uuid(),
-			label,
-			iconPath: componentIcon,
-			tooltip: 'View code of this component',
-			command: {
-				command: 'forge.selectComponent',
-				title: '',
-				arguments: [ label ]
-			},
-			children: []
-		}));
-		this.render();
+		for (let name in registeredComponents) {
+			const items = registeredComponents[name];
+
+			items.forEach(({ content, html }, index) => {
+				const label = index ? `${name} ${index + 1}` : name;
+				components.push({ label, content, html });
+			});
+		}
+
+		pageComponentsItem.children = components.map(({ label, content, html }) => {
+			html = `${renderedContent}\n\n${html}\n\n${originalContent}\n\n${content}`;
+
+			return {
+				id: uuid(),
+				label,
+				iconPath: componentIcon,
+				tooltip: 'View code of this component',
+				command: {
+					command: 'forge.selectComponent',
+					title: '',
+					arguments: [ label, html ]
+				},
+				children: []
+			};
+		});
 	}
 
 	updateComponents(items: Components) {
@@ -106,7 +132,7 @@ class ForgeTree implements TreeDataProvider<Item> {
 		const componentsItem = this.data[2];
 
 		componentsItem.children = components.map(([ label, html ]) => {
-			html = `${originalContent}${html}`;
+			html = `${originalContent}\n\n${html}`;
 
 			return {
 				id: uuid(),
@@ -136,7 +162,6 @@ class ForgeTree implements TreeDataProvider<Item> {
 					page.iconPath = pageIcon;
 				}
 			});
-		this.render();
 	}
 
 	render() {
