@@ -16,13 +16,8 @@
 		"url": "https://github.com/DejanSandic/vscode-static-forge/issues"
 	},
 	"homepage": "https://github.com/DejanSandic/vscode-static-forge#readme",
-	"categories": [
-		"Other"
-	],
-	"activationEvents": [
-		"onCommand:forge.helloWorld",
-		"*"
-	],
+	"categories": [ "Other" ],
+	"activationEvents": [ "onCommand:forge.helloWorld", "*" ],
 	"main": "./out/extension.js",
 	"contributes": {
 		"commands": [
@@ -80,7 +75,8 @@
 			"static-forge": [
 				{
 					"id": "forgeTree",
-					"name": ""
+					"name": "",
+					"when": "workspaceOpened"
 				}
 			]
 		},
