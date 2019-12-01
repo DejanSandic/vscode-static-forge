@@ -51,7 +51,7 @@
 					const component = {
 						el: this,
 						content,
-						html
+						html: window.getRenderedContent(html)
 					};
 
 					if (name in registeredComponents) {

@@ -10,6 +10,7 @@ const polyfil = loadHelper('polyfil.js');
 const navigation = loadHelper('navigation.html');
 const loadNavigation = loadHelper('loadNavigation.js');
 const loadComponents = loadHelper('loadComponents.js');
+const getRenderedContent = loadHelper('getRenderedContent.js');
 
 export function createIndex(path: string) {
 	const page = pages.content[path] || page404;
@@ -27,7 +28,8 @@ export function createIndex(path: string) {
                const pages = ${JSON.stringify(links)};
                const registeredComponents = {};
                const componentsRegistry = {};
-
+               ${getRenderedContent}
+               
                (function init() {
                   const componentsMap = ${JSON.stringify(components.content)};
                   const components = Object.entries(componentsMap);
