@@ -95,6 +95,7 @@ class ForgeTree implements TreeDataProvider<Item> {
 			},
 			children: []
 		}));
+		this.render();
 	}
 
 	updatePageComponents(registeredComponents: RegisteredComponents) {
