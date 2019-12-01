@@ -1,5 +1,8 @@
 {
-	const icon =
+	if (!window._forge) window._forge = {};
+	var pages = window._forge.pages;
+
+	var icon =
 		'<svg class="svg-icon" viewBox="0 0 20 20">' +
 		'<path fill="none" d="M1.729,9.212h14.656l-4.184-4.184c-0.307-0.' +
 		'306-0.307-0.801,0-1.107c0.305-0.306,0.801-0.306,1.106,0 l5.481,5.' +
@@ -10,15 +13,16 @@
 		'305-0.307-0.801,0-1.105l4.184-4.185H1.729c-0.436,0-0.788-0.353-0.788-0.' +
 		'788 S1.293,9.212,1.729,9.212z"></path></svg>';
 
+	window._forge.addLink = function addLink(path) {
+		var name = path === '/' ? '/index' : path;
+		var currentPage = window.location.pathname === path;
+		var className = currentPage ? 'rbsk-link rbsk-active' : 'rbsk-link';
+		var link = '<a href="' + path + '" class="' + className + '">' + icon + '' + name + '</a>';
+		if (window._forge && window._forge.links) window._forge.links.innerHTML += link;
+	};
+
 	window.addEventListener('DOMContentLoaded', () => {
-		const links = document.getElementById('strt-links');
-
-		pages.forEach((path) => {
-			const name = path === '/' ? '/index' : path;
-			const currentPage = window.location.pathname === path;
-			const className = currentPage ? 'strt-link strt-active' : 'strt-link';
-
-			links.innerHTML += `<a href="${path}" class="${className}">${icon}${name}</a>`;
-		});
+		window._forge.links = document.getElementById('rbsk-links');
+		pages && pages.length && pages.forEach(window._forge.addLink);
 	});
 }

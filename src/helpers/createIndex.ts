@@ -24,19 +24,15 @@ export function createIndex(path: string) {
             <script class="rbsk" src="/socket.io/socket.io.js"></script>
             <script class="rbsk">${polyfil}</script>
             <script class="rbsk">
-               const socket = io();
-               const pages = ${JSON.stringify(links)};
-               const registeredComponents = {};
-               const componentsRegistry = {};
-               ${getRenderedContent}
-               
-               (function init() {
-                  const componentsMap = ${JSON.stringify(components.content)};
-                  const components = Object.entries(componentsMap);
-                  
-                  ${loadComponents}
-               })();
-               
+               window._forge = {
+                  socket: io(),
+                  pages: ${JSON.stringify(links)},
+                  registeredComponents: {},
+                  components: Object.entries(${JSON.stringify(components.content)}),
+               };
+
+               ${getRenderedContent}                  
+               ${loadComponents}
                ${socket}
                ${loadNavigation}
                ${tilde}
