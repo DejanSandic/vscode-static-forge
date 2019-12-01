@@ -1,8 +1,8 @@
 {
-	const targets = document.getElementsByClassName('rbsk');
+	var targets = document.getElementsByClassName('rbsk');
 
-	for (let i = 0; i < targets.length; i++) {
-		const target = targets[i];
+	while (targets.length > 0) {
+		var target = targets[0];
 		target.parentNode.removeChild(target);
 	}
 }
