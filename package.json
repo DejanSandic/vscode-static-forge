@@ -16,8 +16,13 @@
 		"url": "https://github.com/DejanSandic/vscode-static-forge/issues"
 	},
 	"homepage": "https://github.com/DejanSandic/vscode-static-forge#readme",
-	"categories": [ "Other" ],
-	"activationEvents": [ "onCommand:forge.helloWorld", "*" ],
+	"categories": [
+		"Other"
+	],
+	"activationEvents": [
+		"onCommand:forge.helloWorld",
+		"*"
+	],
 	"main": "./out/extension.js",
 	"contributes": {
 		"commands": [
@@ -135,9 +140,11 @@
 		"vscode-test": "^1.2.2"
 	},
 	"dependencies": {
+		"@types/js-beautify": "^1.8.1",
 		"chokidar": "^3.3.0",
 		"express": "^4.17.1",
 		"get-port": "^5.0.0",
+		"js-beautify": "^1.10.2",
 		"open": "^7.0.0",
 		"sass": "^1.23.7",
 		"socket.io": "^2.3.0",

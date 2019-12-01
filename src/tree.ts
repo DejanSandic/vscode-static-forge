@@ -1,5 +1,6 @@
 import { join } from 'path';
 import * as uuid from 'uuid';
+import { html as beautify } from 'js-beautify';
 import { window, TreeDataProvider, ProviderResult, TreeItem } from 'vscode';
 
 // Icon loader
@@ -110,7 +111,7 @@ class ForgeTree implements TreeDataProvider<Item> {
 		}
 
 		pageComponentsItem.children = components.map(({ label, content, html }) => {
-			html = `${renderedContent}\n\n${html}\n\n${originalContent}\n\n${content}`;
+			html = `${renderedContent}\n\n${beautify(html)}\n\n${originalContent}\n\n${content}`;
 
 			return {
 				id: uuid(),
